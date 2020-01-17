@@ -1,0 +1,58 @@
+﻿@model MatrixMVCCrud.Models.ViewModel.EmployeeViewModel
+
+@{
+    ViewBag.Title = "EmployeeForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create new Employee</h2>
+
+@using (Html.BeginForm("SaveEmployee", "Home", FormMethod.Post))
+
+{
+
+    @Html.HiddenFor(m=>m.employee.ID)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.employee.Name)
+        @Html.EditorFor(m => m.employee.Name, new { htmlAttributes = new { @class = "form-control" } }) @*new class vizivayet bootstrap*@
+        @Html.ValidationMessageFor(m => m.employee.Name,null)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.employee.Surname)
+        @Html.EditorFor(m => m.employee.Surname, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.employee.Surname, null)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.employee.Age)
+        @Html.EditorFor(m => m.employee.Age, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.employee.Age, null)
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.employee.Gender)
+        @Html.DropDownListFor(m => m.employee.Gender, new SelectList(Model.employees_General_Data, "ID", "Name"), "Choose gender", new { @class = "form-control" }) @*vozvrashay mne ID, a pokazivay na ekrane Name // Name i ID vzati s bazi dannix*@
+        @Html.ValidationMessageFor(m => m.employee.Gender, null)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.employee.Address)
+        @Html.EditorFor(m => m.employee.Address, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.employee.Address, null)
+    </div>
+
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.Employee.Created_Date)
+        @Html.EditorFor(m => m.Employee.Created_Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+        @Html.ValidationMessageFor(m => m.Employee.Created_Date, "Write your date")
+    </div>*@
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+
+}
+

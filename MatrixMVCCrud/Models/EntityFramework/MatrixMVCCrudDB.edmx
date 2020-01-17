@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MatrixMVCCrudDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="nchar" MaxLength="10" />
+          <Property Name="Gender" Type="tinyint" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Created_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Employees_General_Data">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="General_Type_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Employees_General_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Employees_General_Data_Employees_General_Type">
+          <End Role="Employees_General_Type" Type="Self.Employees_General_Type" Multiplicity="0..1" />
+          <End Role="Employees_General_Data" Type="Self.Employees_General_Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees_General_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employees_General_Data">
+              <PropertyRef Name="General_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MatrixMVCCrudDBModelStoreContainer">
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees_General_Data" EntityType="Self.Employees_General_Data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees_General_Type" EntityType="Self.Employees_General_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employees_General_Data_Employees_General_Type" Association="Self.FK_Employees_General_Data_Employees_General_Type">
+            <End Role="Employees_General_Type" EntitySet="Employees_General_Type" />
+            <End Role="Employees_General_Data" EntitySet="Employees_General_Data" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MatrixMVCCrudDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Gender" Type="Byte" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="MatrixMVCCrudDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Employees_General_Data" EntityType="MatrixMVCCrudDBModel.Employees_General_Data" />
+          <EntitySet Name="Employees_General_Type" EntityType="MatrixMVCCrudDBModel.Employees_General_Type" />
+          <AssociationSet Name="FK_Employees_General_Data_Employees_General_Type" Association="MatrixMVCCrudDBModel.FK_Employees_General_Data_Employees_General_Type">
+            <End Role="Employees_General_Type" EntitySet="Employees_General_Type" />
+            <End Role="Employees_General_Data" EntitySet="Employees_General_Data" />
+          </AssociationSet>
+          <EntitySet Name="USERS" EntityType="MatrixMVCCrudDBModel.USER" />
+        </EntityContainer>
+        <EntityType Name="Employees_General_Data">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="General_Type_ID" Type="Int32" />
+          <NavigationProperty Name="Employees_General_Type" Relationship="MatrixMVCCrudDBModel.FK_Employees_General_Data_Employees_General_Type" FromRole="Employees_General_Data" ToRole="Employees_General_Type" />
+        </EntityType>
+        <EntityType Name="Employees_General_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees_General_Data" Relationship="MatrixMVCCrudDBModel.FK_Employees_General_Data_Employees_General_Type" FromRole="Employees_General_Type" ToRole="Employees_General_Data" />
+        </EntityType>
+        <Association Name="FK_Employees_General_Data_Employees_General_Type">
+          <End Type="MatrixMVCCrudDBModel.Employees_General_Type" Role="Employees_General_Type" Multiplicity="0..1" />
+          <End Type="MatrixMVCCrudDBModel.Employees_General_Data" Role="Employees_General_Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees_General_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employees_General_Data">
+              <PropertyRef Name="General_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MatrixMVCCrudDBModelStoreContainer" CdmEntityContainer="MatrixMVCCrudDBEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="MatrixMVCCrudDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees_General_Data">
+            <EntityTypeMapping TypeName="MatrixMVCCrudDBModel.Employees_General_Data">
+              <MappingFragment StoreEntitySet="Employees_General_Data">
+                <ScalarProperty Name="General_Type_ID" ColumnName="General_Type_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees_General_Type">
+            <EntityTypeMapping TypeName="MatrixMVCCrudDBModel.Employees_General_Type">
+              <MappingFragment StoreEntitySet="Employees_General_Type">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="MatrixMVCCrudDBModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="~/Content/Test.css" rel="stylesheet" />
+    <link href="~/css/validationStyle.css" rel="stylesheet" />
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container">
+        @Html.Partial("_Header")
+        <div class="container">
+            @RenderBody()
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/CustomJs/DeleteJsMethods.js"></script>
+
+</body>
+</html>
+

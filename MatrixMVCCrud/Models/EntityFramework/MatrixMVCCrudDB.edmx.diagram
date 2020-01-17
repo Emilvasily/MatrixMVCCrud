@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6de9cc99a38d4029be0ae783404fc86e" Name="Diagram1">
+        <EntityTypeShape EntityType="MatrixMVCCrudDBModel.Employee" Width="2.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MatrixMVCCrudDBModel.Employees_General_Data" Width="1.5" PointX="6.625" PointY="0.875" />
+        <EntityTypeShape EntityType="MatrixMVCCrudDBModel.Employees_General_Type" Width="1.5" PointX="4.375" PointY="1" />
+        <AssociationConnector Association="MatrixMVCCrudDBModel.FK_Employees_General_Data_Employees_General_Type" />
+        <EntityTypeShape EntityType="MatrixMVCCrudDBModel.USER" Width="1.5" PointX="1.125" PointY="3.5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
